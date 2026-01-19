@@ -1,0 +1,14 @@
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.AssemblyInfoInputs.cache
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.AssemblyInfo.cs
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.csproj.CoreCompileInputs.cache
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\bin\Debug\net10.0\ClassesAndObjectsPart1.exe
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\bin\Debug\net10.0\ClassesAndObjectsPart1.deps.json
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\bin\Debug\net10.0\ClassesAndObjectsPart1.runtimeconfig.json
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\bin\Debug\net10.0\ClassesAndObjectsPart1.dll
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\bin\Debug\net10.0\ClassesAndObjectsPart1.pdb
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.dll
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\refint\ClassesAndObjectsPart1.dll
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.pdb
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ClassesAndObjectsPart1.genruntimeconfig.cache
+C:\Users\jkarpiak.NAIT\OneDrive - NAIT\Documents\Courses\2026\Winter\SDEV2301\Lessons\Module 1\Lesson 06\ClassesAndObjectsPart1\ClassesAndObjectsPart1\obj\Debug\net10.0\ref\ClassesAndObjectsPart1.dll
