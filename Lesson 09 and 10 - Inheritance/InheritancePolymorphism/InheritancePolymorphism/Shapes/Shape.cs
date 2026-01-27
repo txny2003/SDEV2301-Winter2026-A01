@@ -73,4 +73,31 @@ namespace InheritancePolymorphism.Shapes
             Console.WriteLine($"The angles of a rectangle are {angleOfCorners} degrees.");
         }
     }
+    // Derived class: Triangle
+    public class Triangle : Shape, IPolygon
+    {
+        public double Height { get; set; }
+        public double Width { get; set; }
+        public int NumberOfSides { get; }
+
+        public Triangle(double h, double w, string color) : base(color)
+        {
+            Height = h;
+            Width = w;
+            NumberOfSides = 3;
+        }
+        public override double GetArea()
+        {
+            return Height * Width / 2.0;
+        }
+        public override void Describe()
+        {
+            Console.WriteLine($"This is a {Color} triangle.");
+        }
+        public void CalculateAngleOfCorners()
+        {
+            double angleOfCorners = 180.0 / NumberOfSides;
+            Console.WriteLine($"The angles of a triangle are {angleOfCorners} degrees.");
+        }
+    }
 }

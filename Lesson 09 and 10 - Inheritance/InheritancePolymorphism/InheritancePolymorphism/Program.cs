@@ -61,8 +61,15 @@ namespace InheritancePolymorphism
             {
                 new Circle("Blue", 4),
                 new Rectangle("Green", 10, 4),
-                new Circle("Brown", 6)
+                new Triangle(10, 4, "Dreary Yellow"),
+                new Rectangle("Aubergine", 3, 12)
             };
+
+            string color = "Red";
+
+            // Because we are passing "color" by value, the color variable in
+            // this Main() method will not have its value changed.
+            AddCircle(shapes, color);
 
             foreach (var s in shapes)
             {
@@ -78,12 +85,31 @@ namespace InheritancePolymorphism
                     Circle c = (Circle)s;
                     Console.WriteLine($"The radius is {c.Radius}");
                 }
+                // Check if the Shape implements the IPolygon Interface
                 if (s is IPolygon)
                 {
+                    // After casting, we only have access to properties to
+                    // methods that are defined in the IPolygon interface
                     var p = (IPolygon)s;
+                    Console.WriteLine($"This shape has {p.NumberOfSides} sides.");
                     p.CalculateAngleOfCorners();
                 }
             }
+        }
+
+        static void AddCircle(List<Shape> shapes, string color)
+        {
+            // "color" is passed by value, meaning that any changes made inside of
+            // the AddCircle() method do not change the value variable in the
+            // calling function, in this case Main().
+            color = "Orange";
+
+            // The shapes list is passed by reference, meaning that the location
+            // of the List in memory is passed, allowing us to change the values
+            // in the calling function (adding a new item to the List).
+            shapes.Add(new Circle(color, 5));
+
+            
         }
     }
 }
