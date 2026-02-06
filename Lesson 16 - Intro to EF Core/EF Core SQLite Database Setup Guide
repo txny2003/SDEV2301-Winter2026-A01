@@ -8,7 +8,7 @@ It provides steps to migrate existing entities into a database.
 1. Install the following Nuget Packages:
     - `Microsoft.EntityFrameworkCore`
     - `Microsoft.EntityFrameworkCore.Sqlite` 
-    - `Microsoft.EntityFrameworkCore.Sqlite.Core`
+    - `Microsoft.EntityFrameworkCore.Sqlite.Design`
 2. Create your entity classes.
 3. Create a new Context class that inherits from DbContext.
 4. In the Context class, for each Entity, create a new public DbSet<> property with standard get and set methods.
