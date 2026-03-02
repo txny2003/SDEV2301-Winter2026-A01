@@ -1,0 +1,132 @@
+﻿@page "/taskform"
+@using EfCoreBlazorDemo.Models
+@using EfCoreBlazorDemo.Services
+@inject TaskService TaskService
+@inject IJSRuntime JSRuntime
+
+@if (tasks is null)
+{
+    <p>Loading...</p>
+}
+else if (tasks.Count == 0)
+{
+    <p>No products yet. Add one below.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr><th>Title</th><th>Due Date</th><th>Is Complete</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var t in tasks)
+            {
+                <tr>
+                    <td>@t.Title</td>
+                    <td>@t.DueDate</td>
+                    <td>@(t.IsComplete ? "Yes" : "No")</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary"
+                                @onclick="() => EditTask(t)">
+                            Edit
+                        </button>
+
+                        <button class="btn btn-sm btn-outline-danger ms-2"
+                                @onclick="() => DeleteTaskAsync(t.Id)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+<h4>@(isEditMode ? "Edit Task" : "Add Task")</h4>
+
+<EditForm Model="_model" OnValidSubmit="SaveAsync">
+    <ValidationSummary />
+    <DataAnnotationsValidator />
+
+    <label>Title:</label>
+    <InputText @bind-Value="_model.Title" />
+    <ValidationMessage For="@(() => _model.Title)" />
+    <br />
+    <label>Due Date:</label>
+    <InputDate @bind-Value="_model.DueDate" />
+    <ValidationMessage For="@(() => _model.DueDate)" />
+    <br />
+    <label>Is Complete:</label>
+    <InputCheckbox @bind-Value="_model.IsComplete" />
+    <ValidationMessage For="@(() => _model.IsComplete)" />
+    <br />
+    <button type="submit">Submit</button>
+    @if (isEditMode)
+    {
+        <button class="btn btn-secondary ms-2"
+                type="button"
+                @onclick="ResetForm">
+            Cancel
+        </button>
+    }
+</EditForm>
+
+@code {
+    private List<TaskItem>? tasks;
+    private TaskItem _model = new();
+    private bool isEditMode = false;
+    protected override async Task OnInitializedAsync()
+    {
+        tasks = await TaskService.ListTasksAsync();
+    }
+    private async Task SaveAsync()
+    {
+        if (isEditMode)
+        {
+            await TaskService.UpdateTaskAsync(_model);
+        }
+        else
+        {
+            await TaskService.AddTaskAsync(_model);
+        }
+
+        tasks = await TaskService.ListTasksAsync();
+
+        ResetForm();
+    }
+
+    private void EditTask(TaskItem task)
+    {
+        _model = new TaskItem
+        {
+            Id = task.Id,
+            Title = task.Title,
+            DueDate = task.DueDate,
+            IsComplete = task.IsComplete
+        };
+
+        isEditMode = true;
+    }
+    private void ResetForm()
+    {
+        _model = new TaskItem();
+        isEditMode = false;
+    }
+    private async Task DeleteTaskAsync(int id)
+    {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>(
+            "confirm", "Are you sure you want to delete this item?");
+
+        if (!confirmed)
+            return;
+
+        await TaskService.DeleteTaskAsync(id);
+        tasks = await TaskService.ListTasksAsync();
+
+        if (isEditMode && _model.Id == id)
+        {
+            ResetForm();
+        }
+    }
+}

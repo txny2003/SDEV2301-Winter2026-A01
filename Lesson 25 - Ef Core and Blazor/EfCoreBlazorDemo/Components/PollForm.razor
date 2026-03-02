@@ -1,0 +1,87 @@
+﻿@page "/pollform"
+@using EfCoreBlazorDemo.Models
+@using EfCoreBlazorDemo.Services
+@inject PollService PollService
+
+<h3>Poll Results</h3>
+
+@if (Polls == null)
+{
+    <p>Loading...</p>
+}
+else if (Polls.Count == 0)
+{
+    <p>No products yet. Add one below.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr><th>Candidate</th><th>Votes</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Polls)
+            {
+                <tr>
+                    <td>@p.Candidate</td>
+                    <td>@p.Votes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+<h3>Add Vote</h3>
+<EditForm Model="newPoll" OnValidSubmit="AddPoll">
+    <ValidationSummary />
+    <DataAnnotationsValidator />
+
+    <label>Name:</label>
+    <InputText @bind-Value="newPoll.Name" />
+    <ValidationMessage For="@(() => newPoll.Name)" />
+    <br />
+    <label>City:</label>
+    <InputText @bind-Value="newPoll.City" />
+    <ValidationMessage For="@(() => newPoll.City)" />
+    <br />
+    <InputRadioGroup @bind-Value="@newPoll.Candidate">
+        Candidate:
+        <br>
+        @foreach (var candidate in Candidates)
+        {
+            <InputRadio Value="candidate" />
+            @candidate
+            <br>
+        }
+    </InputRadioGroup>
+    <ValidationMessage For="@(() => newPoll.Candidate)" />
+    <br />
+    <label>Confidence Level:</label>
+    <InputNumber @bind-Value="newPoll.ConfidenceLevel" />
+    <ValidationMessage For="@(() => newPoll.ConfidenceLevel)" />
+    <br />
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private Poll newPoll = new();
+    private List<(string? Candidate, int Votes)> Polls = new();
+    private List<string> Candidates = new List<string>
+    {
+        "Dancing Dan",
+        "Roller Blading Guitar Guy",
+        "The Current Mayor",
+        "A rock with googley eyes glued to it"
+    };
+    protected override async Task OnInitializedAsync()
+    {
+        Polls = await PollService.GetVoteCounts();
+    }
+    private async Task AddPoll()
+    {
+        await PollService.AddPollAsync(newPoll);
+        Polls = await PollService.GetVoteCounts();
+        newPoll = new Poll();
+    }
+}
