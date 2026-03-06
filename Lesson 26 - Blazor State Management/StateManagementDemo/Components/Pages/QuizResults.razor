@@ -1,0 +1,18 @@
+﻿@page "/quiz-results"
+@using StateManagementDemo.Services
+@inject QuizState QuizState
+
+<h3>Quiz Results</h3>
+@if (QuizState.TotalAnswered == 0)
+{
+    <p>You have not answered any questions</p>
+}
+else
+{
+    <p>Your score is @QuizState.Score / @QuizState.TotalAnswered</p>
+    <button onclick="@(() => QuizState.Reset())">Reset Quiz</button>
+}
+
+@code {
+
+}

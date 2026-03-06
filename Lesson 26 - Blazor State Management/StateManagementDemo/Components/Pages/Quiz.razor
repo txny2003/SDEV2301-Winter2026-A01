@@ -1,0 +1,45 @@
+﻿@page "/quiz"
+@using StateManagementDemo.Services
+@inject QuizState QuizState
+<h3>Quiz</h3>
+@if (currentIndex < questions.Count)
+{
+    <h4>@questions[currentIndex].Question</h4>
+    <InputText @bind-Value="answer" />
+    <button @onclick="SubmitAnswer">Submit Answer</button>
+    <p>@feedback</p>
+}
+else
+{
+    <p>Quiz Complete! Navigate to the Results page to view your score!</p>
+}
+
+@code {
+    private List<(string Question, string Answer)> questions = new()
+    {
+        ("What is the capital of France?", "Paris"),
+        ("How many sides does a hexagon have?", "6"),
+        ("What is the chemical symbol for water?", "H2O"),
+        ("Which planet is closest to the Sun?", "Mercury"),
+        ("What is 12 x 12?", "144")
+    };
+
+    private int currentIndex = 0;
+    private string? answer = null;
+    private string? feedback = null;
+
+    private void SubmitAnswer()
+    {
+        if (string.IsNullOrWhiteSpace(answer))
+            return;
+
+        bool isCorrect = answer.ToLower() == questions[currentIndex].Answer.ToLower();
+
+        QuizState.RecordAnswer(isCorrect);
+        feedback = isCorrect ? "Correct" : $"Incorrect. The answer was {questions[currentIndex].Answer}";
+        currentIndex++;
+
+        answer = null;
+
+    }
+}

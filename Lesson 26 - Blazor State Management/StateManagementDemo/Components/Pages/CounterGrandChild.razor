@@ -1,0 +1,15 @@
+﻿<h3>Counter Grandchild</h3>
+
+<p>Grandchild Counter Value: @Value</p>
+<button @onclick="Increment">Increment Grandchild</button>
+
+
+@code {
+    // CascadingParameter allows descendants to subscribe to values in any of its ancestors
+    [CascadingParameter]
+    public int Value { get; set; }
+    private void Increment()
+    {
+        Value++;
+    }
+}

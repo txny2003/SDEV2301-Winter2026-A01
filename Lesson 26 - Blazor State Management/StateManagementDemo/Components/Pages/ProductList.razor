@@ -1,0 +1,21 @@
+﻿@page "/products"
+@using StateManagementDemo.Services
+@inject CartState Cart
+
+<h3>Products</h3>
+
+<button @onclick="@(() => AddItem("Laptop"))">Add Laptop</button>
+<button @onclick="@(() => AddItem(" Headphones"))">Add Headphones</button>
+<button @onclick="@(() => AddItem(" USB Cable"))">Add USB Cable</button>
+
+<p>@message</p>
+
+@code {
+    private string? message;
+
+    void AddItem(string item)
+    {
+        Cart.Add(item);
+        message = $"{item} added to cart!";
+    }
+}

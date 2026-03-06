@@ -1,0 +1,17 @@
+﻿@page "/theme"
+@using StateManagementDemo.Models
+<h3>Theme Selector</h3>
+
+<label>Background Color:</label>
+<InputText @bind-Value="theme.BackgroundColor" />
+<br />
+<label>Text Color:</label>
+<InputText @bind-Value="theme.TextColor" />
+<br />
+<CascadingValue Value="theme">
+    <ThemePanel />
+</CascadingValue>
+
+@code {
+    private ThemeInfo theme = new();
+}

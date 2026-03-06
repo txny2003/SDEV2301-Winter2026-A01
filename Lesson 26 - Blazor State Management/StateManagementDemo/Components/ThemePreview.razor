@@ -1,0 +1,11 @@
+﻿@using StateManagementDemo.Models
+<h3>Theme Preview</h3>
+
+<div style="background-color: @theme.BackgroundColor; color: @theme.TextColor;">
+    <p>This is the theme preview.</p>
+</div>
+
+@code {
+    [CascadingParameter]
+    private ThemeInfo theme { get; set; }
+}

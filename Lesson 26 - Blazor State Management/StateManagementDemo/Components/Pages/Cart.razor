@@ -1,0 +1,19 @@
+﻿@page "/cart"
+@using StateManagementDemo.Services
+@inject CartState State
+
+<h3>Your Cart</h3>
+
+@if (State.Items.Count == 0)
+{
+    <p>No items in cart.</p>
+}
+else
+{
+    <ul>
+        @foreach (var item in State.Items)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}

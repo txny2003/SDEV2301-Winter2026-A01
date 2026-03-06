@@ -1,0 +1,15 @@
+﻿<h3>Counter Child</h3>
+
+<p>Child Counter Value: @Value</p>
+<button @onclick="Increment">Increment Child</button>
+
+<CounterGrandChild />
+@code {
+    
+    [Parameter]
+    public int Value { get; set; } = 0;
+    private void Increment()
+    {
+        Value++;
+    }
+}
