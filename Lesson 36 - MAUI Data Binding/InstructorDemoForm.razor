@@ -1,0 +1,20 @@
+﻿@page "/instructordemoform"
+
+<h3>Live Preview Form</h3>
+
+<label>Name:</label>
+<input @bind="name" @bind:event="oninput" />
+
+<label>Favorite Color:</label>
+
+<input @bind="favoriteColor" @bind:event="oninput" />
+
+@* <input value="@favoriteColor" /> *@
+
+
+<p>You entered: @name, whose favorite color is @favoriteColor</p>
+
+@code {
+    private string name = "";
+    private string favoriteColor = "";
+}

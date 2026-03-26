@@ -1,0 +1,24 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>   @* View in MVU *@
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<h2>MVU - Model-View-Update</h2>
+<div>
+    Model → View
+    ↑      ↓
+    └─ Update
+
+</div>
+
+@code {
+    private int currentCount = 0;   // Model in MVU
+
+    private void IncrementCount()   // Update in MVU 
+    {
+        currentCount++;
+    }
+}

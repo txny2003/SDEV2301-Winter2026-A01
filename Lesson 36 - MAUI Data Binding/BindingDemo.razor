@@ -1,0 +1,22 @@
+﻿@page "/binding-demo"
+
+<h3>Binding Demo</h3>
+
+<h4>Simple Binding Example</h4>
+<input @bind="name" />
+<p>Hello @name</p>
+
+<h4>One-Way vs Two-Way Binding Demo</h4>
+<p>One-way binding example:</p>
+<input value="@name" />
+
+<h4>What @@bind Expands To</h4>
+
+<p>@@bind is shorthand for writing BOTH a value and an event handler:</p>
+
+<input value="@name" @oninput="(e => name = e.Value?.ToString())" />
+
+
+@code {
+    private string name = "";
+}

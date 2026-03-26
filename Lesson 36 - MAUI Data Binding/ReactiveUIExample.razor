@@ -1,0 +1,14 @@
+﻿@page "/reactive-ui-example"
+
+<h3>Reactive UI Example</h3>
+
+<textarea @bind="message" @bind:event="oninput" maxlength="150"></textarea>
+<p>Character count: @message.Length</p>
+<p>
+    Remaining characters: @(maxLength - message.Length)
+</p>
+
+@code {
+    private string message = "";
+    private int maxLength = 150;
+}
