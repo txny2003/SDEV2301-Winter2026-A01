@@ -1,0 +1,63 @@
+﻿@page "/feature/{type}"
+@using Lesson38MauiApp.Services
+@inject DeviceService DeviceService
+
+<h3>Feature Detail: @type</h3>
+
+@if (normalizedType == "battery")
+{
+    <p>@batteryInfo</p>
+}
+else if (normalizedType == "deviceinfo")
+{
+    <p>@deviceInfo</p>
+}
+else
+{
+    <p>Unknown feature type: @type</p>
+    <p>Please navigate from the Device Features list.</p>
+}
+
+<a href="/features">← Back to features</a>
+
+@code {
+    [Parameter] public string? type { get; set; }
+
+    private string normalizedType = "";
+    private string? batteryInfo;
+    private string? deviceInfo;
+
+    protected override void OnParametersSet()
+    {
+        normalizedType = (type ?? "").ToLowerInvariant();
+
+        if (normalizedType == "battery")
+        {
+            LoadBatteryInfo();
+        }
+        else if (normalizedType == "deviceinfo")
+        {
+            LoadDeviceInfo();
+        }
+    }
+
+    private void LoadBatteryInfo()
+    {
+        var level = DeviceService.GetBatteryLevel();
+        var source = DeviceService.GetPowerSource();
+
+        batteryInfo = level is null
+            ? "Battery level not available on this device."
+            : $"Battery: {level}% (Source: {source})";
+    }
+
+    private void LoadDeviceInfo()
+    {
+        var model = DeviceService.GetModel();
+        var manufacturer = DeviceService.GetManufacturer();
+        var os = DeviceService.GetOsVersion();
+
+        deviceInfo = $"{manufacturer} {model} (OS: {os})";
+    }
+}
+

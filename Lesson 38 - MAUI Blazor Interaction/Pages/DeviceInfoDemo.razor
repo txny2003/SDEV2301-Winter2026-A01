@@ -1,0 +1,48 @@
+﻿@page "/deviceinfo"
+@using Lesson38MauiApp.Services
+@inject DeviceService DeviceService
+
+<h3>Device Info Demo</h3>
+
+<p><strong>Model:</strong> @deviceModel</p>
+<p><strong>Manufacturer:</strong> @manufacturer</p>
+<p><strong>OS Version:</strong> @osVersion</p>
+
+<h3>Battery</h3>
+
+@if (batteryLevel is null)
+{
+    <p><strong>Level:</strong> Not available</p>
+}
+else
+{
+    <p><strong>Level:</strong> @batteryLevel%</p>
+}
+
+<p><strong>Power Source:</strong> @powerSource</p>
+
+<button class="btn btn-primary" @onclick="LoadData">Refresh</button>
+
+@code {
+    private string deviceModel = "";
+    private string manufacturer = "";
+    private string osVersion = "";
+    private int? batteryLevel = null;
+    private string powerSource = "";
+
+    protected override void OnInitialized()
+    {
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        deviceModel = DeviceService.GetModel();
+        manufacturer = DeviceService.GetManufacturer();
+        osVersion = DeviceService.GetOsVersion();
+
+        // The next two may require permissions or may not be available on all devices
+        batteryLevel = DeviceService.GetBatteryLevel();
+        powerSource = DeviceService.GetPowerSource();
+    }
+}
