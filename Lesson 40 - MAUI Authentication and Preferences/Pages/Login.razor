@@ -1,0 +1,38 @@
+﻿@page "/login"
+@inject NavigationManager Navigation
+
+<h3>Login</h3>
+
+@if(string.IsNullOrEmpty(errorMessage) == false)
+{
+    <p style="color:red">@errorMessage</p>
+}
+
+
+<label>Username:</label>
+<input @bind="username" />
+
+<label>Password:</label>
+<input type="password" @bind="password" />
+
+<button @onclick="HandleLogin">Login</button>
+
+@code {
+    private string username = "";
+    private string password = "";
+    private string errorMessage = "";
+
+    private async Task HandleLogin()
+    {
+        if (username == "user2301" && password == "Password2301")
+        {
+            var token = Guid.NewGuid().ToString();
+            await SecureStorage.Default.SetAsync("authToken", token);
+            Navigation.NavigateTo("/");
+        } 
+        else
+        {
+            errorMessage = "Invalid username or password.";
+        }
+    }
+}

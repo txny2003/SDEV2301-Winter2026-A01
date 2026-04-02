@@ -1,0 +1,82 @@
+﻿@implements IDisposable
+@inject NavigationManager Navigation
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Lesson40DemoMauiApp</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+     
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="settings">
+                <span class="bi bi-gear fs-5 mb-4" aria-hidden="true"></span> Settings
+            </NavLink>
+        </div>
+        @*<div class="nav-item px-3">
+            <NavLink class="nav-link" href="weather">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            </NavLink>
+        </div> *@
+
+        @if (isLoggedIn)
+        {
+            <div class="nav-item px-3">
+                <button class="nav-link btn btn-link text-start p-0" @onclick="Logout">
+                    <span class="bi bi-door-closed fs-5 mb-4"></span> Logout
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="/login">
+                    <span class="bi bi-door-open fs-5 mb-4" aria-hidden="true"></span> Login
+                </NavLink>
+            </div>
+        }
+    </nav>
+</div>
+
+@code {
+    private bool isLoggedIn = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Navigation.LocationChanged += OnLocationChanged;
+        await CheckLoginAsync();
+    }
+
+    private async Task CheckLoginAsync()
+    {
+        var token = await SecureStorage.Default.GetAsync("authToken");
+        isLoggedIn = !string.IsNullOrEmpty(token);
+    }
+
+    private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        await CheckLoginAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task Logout()
+    {
+        SecureStorage.Default.Remove("authToken");
+        isLoggedIn = false;
+        Navigation.NavigateTo("/login", true);
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
+    }
+}
